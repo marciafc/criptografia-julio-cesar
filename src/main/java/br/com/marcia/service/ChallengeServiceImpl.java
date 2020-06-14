@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 
 @Service
@@ -73,7 +72,7 @@ public class ChallengeServiceImpl implements ChallengeService {
                 .build();*/
     }
 
-    public String enviarArquivoFeign(String token, File file) {
+    public String enviarArquivoFeign(String token, MultipartFile file) {
         return codenationApiService.enviarDadosCriptografia(token, file);
     }
 

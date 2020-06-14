@@ -5,8 +5,7 @@ import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
 import feign.Response;
-
-import java.io.File;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface CodenationApiClient {
 
@@ -15,6 +14,6 @@ public interface CodenationApiClient {
     
     @RequestLine("POST challenge/dev-ps/submit-solution?token={token}")
     @Headers("Content-Type: multipart/form-data")
-    Response enviarDadosCriptografia(@Param("token") String token, @Param("answer") File file);
+    Response enviarDadosCriptografia(@Param("token") String token, @Param("answer") MultipartFile file);
 
 }

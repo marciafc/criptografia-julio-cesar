@@ -4,18 +4,18 @@ import br.com.marcia.domain.CriptografiaModel;
 import br.com.marcia.dto.CriptografiaDTO;
 import br.com.marcia.mapper.CriptografiaMapper;
 import br.com.marcia.util.ArquivoUtil;
+import br.com.marcia.util.FileUtil;
 import br.com.marcia.util.HashUtil;
 import br.com.marcia.ws.service.CodenationApiService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 
 @Service
 public class ChallengeServiceImpl implements ChallengeService {
@@ -41,37 +41,17 @@ public class ChallengeServiceImpl implements ChallengeService {
         return criptografiaDTO;
     }
 
-    public String enviarArquivoRest(String token, MultipartFile file) {
+    public String enviarArquivoRest(String token, MultipartFile file) throws IOException {
         String url = "https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=".concat(token);
         ResponseEntity<String> response = null;
-
         try {
-            // header
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-            // body
-            MultiValueMap<String, String> fileMap = new LinkedMultiValueMap<>();
-            ContentDisposition contentDisposition = ContentDisposition
-                    .builder("form-data")
-                    .name("answer")
-                    .filename(file.getName())
-                    .build();
-            fileMap.add(HttpHeaders.CONTENT_DISPOSITION, contentDisposition.toString());
-            HttpEntity<byte[]> fileEntity = new HttpEntity<>(file.getBytes(), fileMap);
-            MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-            body.add("file", fileEntity);
-
-            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
             response = new RestTemplate().exchange(url,
                     HttpMethod.POST,
-                    requestEntity,
+                    FileUtil.converterMultipartFile(file, "answer"),
                     String.class);
-
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
-
         return response != null ? response.getBody() : null;
     }
 

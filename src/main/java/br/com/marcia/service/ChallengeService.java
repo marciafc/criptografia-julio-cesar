@@ -4,6 +4,7 @@ import br.com.marcia.dto.CriptografiaDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 
 public interface ChallengeService {
 
@@ -13,6 +14,6 @@ public interface ChallengeService {
 
     CriptografiaDTO descriptografarRest(String token);
 
-    String enviarArquivoRest(String token, MultipartFile file);
+    String enviarArquivoRest(String token, MultipartFile file) throws IOException;
 
 }

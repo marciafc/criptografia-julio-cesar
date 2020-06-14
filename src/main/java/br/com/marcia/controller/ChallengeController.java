@@ -27,7 +27,12 @@ public class ChallengeController {
 
     @PostMapping(value = "/v1/enviar-arquivo", consumes =  MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> enviarArquivo(@RequestParam String token,@RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok().body(challengeService.enviarArquivoRest(token, file));
+        try {
+            return ResponseEntity.ok().body(challengeService.enviarArquivoRest(token, file));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping(value="/v2/descriptografar", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,16 +41,19 @@ public class ChallengeController {
     }
 
     @PostMapping(value = "/v2/enviar-arquivo", consumes =  MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> enviarArquivoFeign(@RequestParam String token, @RequestPart("answer")  MultipartFile file) {
+    public ResponseEntity<String> enviarArquivoFeign(@RequestParam String token, @RequestPart("answer") MultipartFile file) {
 
-        // TODO Enconder MultipartFile
+        // TODO Encoder MultipartFile
         File fileCopy = new File("answer.json");
         try {
             file.transferTo(fileCopy);
+            return ResponseEntity.ok().body(challengeService.enviarArquivoFeign(token, fileCopy));
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            fileCopy.delete();
         }
-        return ResponseEntity.ok().body(challengeService.enviarArquivoFeign(token, fileCopy));
+        return ResponseEntity.noContent().build();
     }
 
 }

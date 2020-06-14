@@ -42,7 +42,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     public String enviarArquivoRest(String token, MultipartFile file) throws IOException {
         String url = "https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=".concat(token);
-        ResponseEntity<String> response = null;
+        ResponseEntity<String> response;
         try {
             response = new RestTemplate().exchange(url,
                     HttpMethod.POST,
@@ -63,13 +63,6 @@ public class ChallengeServiceImpl implements ChallengeService {
 
         return criptografiaDTO;
 
-        /*return CriptografiaDTO.builder()
-                .numeroCasas(criptografia.getNumeroCasas())
-                .cifrado(criptografia.getCifrado())
-                .decifrado(criptografia.getDecifrado())
-                .resumoCriptografico(criptografia.getResumoCriptografico())
-                .token(criptografia.getToken())
-                .build();*/
     }
 
     public String enviarArquivoFeign(String token, MultipartFile file) {

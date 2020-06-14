@@ -1,7 +1,6 @@
-package br.com.marcia.dto;
+package br.com.marcia.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,10 +12,9 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CriptografiaDTO implements Serializable {
+public class CriptografiaModel implements Serializable {
 
     @JsonProperty("numero_casas")
-    @SerializedName("numero_casas")
     private Integer numeroCasas;
 
     private String token;
@@ -26,6 +24,6 @@ public class CriptografiaDTO implements Serializable {
     private String decifrado;
 
     @JsonProperty("resumo_criptografico")
-    @SerializedName("resumo_criptografico")
     private String resumoCriptografico;
+
 }

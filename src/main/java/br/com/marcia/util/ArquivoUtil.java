@@ -20,14 +20,4 @@ public class ArquivoUtil {
         }
     }
 
-    public static String obterArquivo()  {
-        try {
-            Path path = Paths.get(System.getProperty("user.dir").concat(File.separator).concat(NOME_ARQUIVO));
-            byte[] bytesArquivo = Files.readAllBytes(path);
-            return new String(bytesArquivo);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }

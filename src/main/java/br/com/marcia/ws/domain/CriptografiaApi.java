@@ -1,4 +1,4 @@
-package br.com.marcia.dto;
+package br.com.marcia.ws.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CriptografiaDTO implements Serializable {
+public class CriptografiaApi implements Serializable {
 
     @JsonProperty("numero_casas")
     @SerializedName("numero_casas")

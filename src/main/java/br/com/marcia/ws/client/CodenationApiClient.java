@@ -1,19 +1,20 @@
 package br.com.marcia.ws.client;
 
-import br.com.marcia.ws.domain.CriptografiaEntity;
+import br.com.marcia.ws.domain.CriptografiaApi;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.multipart.MultipartFile;
+import feign.Response;
+
+import java.io.File;
 
 public interface CodenationApiClient {
 
     @RequestLine("GET challenge/dev-ps/generate-data?token={token}")
-    CriptografiaEntity buscarDadosCriptografia(@Param("token") String token);
-
+    CriptografiaApi buscarDadosCriptografia(@Param("token") String token);
+    
     @RequestLine("POST challenge/dev-ps/submit-solution?token={token}")
     @Headers("Content-Type: multipart/form-data")
-    Object enviarDadosCriptografia(@Param("token") String token, @RequestBody MultipartFile file);
+    Response enviarDadosCriptografia(@Param("token") String token, @Param("answer") File file);
 
 }

@@ -26,7 +26,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfo(
                 "Criptografia de Júlio César",
-                "Desafio realizado para ingresso no programa AceleraDev da Codenation - Java",
+                "Desafio realizado para ingresso no programa AceleraDev Java da Codenation",
                 "1.0",
                 null,
                 null,

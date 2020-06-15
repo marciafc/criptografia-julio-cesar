@@ -1,5 +1,8 @@
 # Criptografia de Júlio César
 
+Desafio realizado para ingresso no programa AceleraDev Java da [Codenation](https://codenation.dev).
+
+## Descrição
 
 Segundo o Wikipedia, criptografia ou criptologia (em grego: kryptós, "escondido", e gráphein, "escrita") é o estudo e prática de 
 princípios e técnicas para comunicação segura na presença de terceiros, chamados “adversários”. Mas geralmente, a criptografia 
@@ -56,25 +59,61 @@ tipo file com o nome answer. Considere isso ao enviar o arquivo.
 O resultado da submissão vai ser sua nota ou o erro correspondente. Você pode submeter quantas vezes achar necessário, mas a API não 
 vai permitir mais de uma submissão por minuto.
 
+Exemplo de retorno com a nota:
+
+```json
+{"score": 100}
+```
+
 ## Implementação
 
-Para fins de estudo, o desafio foi implementado em RestTemplate e com Feign
-
-RestTemplate
-
-    GET /v1/descriptografar: obtém o arquivo json com o desafio e descriptografa
+O desafio foi resolvido no formato de API RESTful. Foram criados dois endpoints: 
     
-    POST /v1/enviar-arquivo: envia a resolução do desafio
+    GET /descriptografar
     
+    POST /enviar-arquivo
+
+O endpoint **/descriptografar** obtém o arquivo JSON para solucionar o desafio.
+
+```json
+// Resultado da requisição
+{
+  "token": "token_do_usuario",
+  "cifrado": "utk ul znk hommkyz vxuhrksy zngz yulzcgxk jkbkruvkxy lgik oy zngz zkinturume ingtmky xgvojre. oz oy bkxe ngxj zu yzge iaxxktz. bobkq cgjncg",
+  "decifrado": "one of the biggest problems that software developers face is that technology changes rapidly. it is very hard to stay current. vivek wadhwa",
+  "numero_casas": 6,
+  "resumo_criptografico": "2e89f9727a5b7bc83dde4516df5d2b7d85a52e22"
+} 
+```
+
+O endpoint **/enviar-arquivo** faz a submissão da solução.   
+```json
+// Resultado da requisição
+{
+  "score": 100
+}   
+```
+
+Para fins de estudo, o desafio foi implementado com **RestTemplate** e com **Feign**. Para separar as diferentes implementações, foi utilizado o recurso de versionamento:
+
+RestTemplate:
+
+    GET /v1/descriptografar
+    
+    POST /v1/enviar-arquivo    
  
-Feign
+Feign:
 
-    GET /v2/descriptografar: obtém o arquivo json com o desafio e descriptografa
+    GET /v2/descriptografar
     
-    POST /v2/enviar-arquivo: envia a resolução do desafio
+    POST /v2/enviar-arquivo
  
+## Tecnologias
 
-Referências
+ - Java
+ - Spring Boot
+
+## Referências
 
   - [Caesar cipher: Encode and decode online](https://cryptii.com/pipes/caesar-cipher)
   

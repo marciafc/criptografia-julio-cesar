@@ -123,4 +123,6 @@ Feign:
   
   - [Uploading a file with a filename with Spring RestTemplate](https://medium.com/red6-es/uploading-a-file-with-a-filename-with-spring-resttemplate-8ec5e7dc52ca)
   
+  - [Sending multipart requests using Spring Boot and Feign](https://medium.com/comsystoreply/sending-multipart-requests-using-spring-boot-and-feign-20d5602d0f21)
+  
   - [File Uploading with Open Feign](https://howtoprogram.xyz/2016/12/29/file-uploading-open-feign)

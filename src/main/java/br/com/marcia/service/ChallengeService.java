@@ -1,6 +1,7 @@
 package br.com.marcia.service;
 
 import br.com.marcia.dto.CriptografiaDTO;
+import br.com.marcia.domain.ResultadoModel;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -10,10 +11,10 @@ public interface ChallengeService {
 
     CriptografiaDTO descriptografarFeign(String token);
 
-    String enviarArquivoFeign(String token, MultipartFile file);
+    ResultadoModel enviarArquivoFeign(String token, MultipartFile file);
 
     CriptografiaDTO descriptografarRest(String token);
 
-    String enviarArquivoRest(String token, MultipartFile file) throws IOException;
+    ResultadoModel enviarArquivoRest(String token, MultipartFile file) throws IOException;
 
 }

@@ -3,7 +3,9 @@ package br.com.marcia.ws.service;
 import br.com.marcia.ws.client.CodenationApiClient;
 import br.com.marcia.ws.decoder.CustomErrorDecoder;
 import br.com.marcia.ws.domain.CriptografiaApi;
+import br.com.marcia.domain.ResultadoModel;
 import feign.Feign;
+import feign.Response;
 import feign.form.spring.SpringFormEncoder;
 import feign.gson.GsonDecoder;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +24,9 @@ public class CodenationApiServiceImpl implements CodenationApiService {
         return getClient().buscarDadosCriptografia(token);
     }
 
-    public String enviarDadosCriptografia(String token, MultipartFile file){
-        return getClient().enviarDadosCriptografia(token, file).body().toString();
+    public ResultadoModel enviarDadosCriptografia(String token, MultipartFile file){
+        Response response = getClient().enviarDadosCriptografia(token, file);
+        return ResultadoModel.builder().score(response.body().toString()).httpStatusCode(response.status()).build();
     }
 
     private CodenationApiClient getClient() {

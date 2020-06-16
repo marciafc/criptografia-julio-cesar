@@ -75,8 +75,11 @@ O desafio foi resolvido no formato de API RESTful. Foram criados dois endpoints:
 
 O endpoint **/descriptografar** obtém o arquivo JSON para solucionar o desafio.
 
-```json
-// Resultado da requisição
+Parameters: 
+ - token (String): o token do usuário
+ 
+Resultado da requisição:
+```json 
 {
   "token": "token_do_usuario",
   "cifrado": "utk ul znk hommkyz vxuhrksy zngz yulzcgxk jkbkruvkxy lgik oy zngz zkinturume ingtmky xgvojre. oz oy bkxe ngxj zu yzge iaxxktz. bobkq cgjncg",
@@ -86,9 +89,14 @@ O endpoint **/descriptografar** obtém o arquivo JSON para solucionar o desafio.
 } 
 ```
 
-O endpoint **/enviar-arquivo** faz a submissão da solução.   
+O endpoint **/enviar-arquivo** faz a submissão da solução.  
+
+Parameters: 
+ - file (MultipartFile): o arquivo JSON com a solução
+ - token (String): o token do usuário 
+
+Resultado da requisição: 
 ```json
-// Resultado da requisição
 {
   "score": 100
 }   

@@ -6,6 +6,7 @@ import br.com.marcia.mapper.CriptografiaMapper;
 import br.com.marcia.util.ArquivoUtil;
 import br.com.marcia.util.FileUtil;
 import br.com.marcia.util.HashUtil;
+import br.com.marcia.domain.ResultadoModel;
 import br.com.marcia.ws.service.CodenationApiService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class ChallengeServiceImpl implements ChallengeService {
         return criptografiaDTO;
     }
 
-    public String enviarArquivoRest(String token, MultipartFile file) throws IOException {
+    public ResultadoModel enviarArquivoRest(String token, MultipartFile file) throws IOException {
         String url = "https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=".concat(token);
         ResponseEntity<String> response;
         try {
@@ -48,10 +49,10 @@ public class ChallengeServiceImpl implements ChallengeService {
                     HttpMethod.POST,
                     FileUtil.converterMultipartFile(file, "answer"),
                     String.class);
-        } catch (Exception e) {
+            return ResultadoModel.builder().httpStatusCode(response.getStatusCodeValue()).score(response.getBody()).build();
+        } catch (IOException e) {
             throw e;
         }
-        return response != null ? response.getBody() : null;
     }
 
     public CriptografiaDTO descriptografarFeign(String token) {
@@ -65,7 +66,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     }
 
-    public String enviarArquivoFeign(String token, MultipartFile file) {
+    public ResultadoModel enviarArquivoFeign(String token, MultipartFile file) {
         return codenationApiService.enviarDadosCriptografia(token, file);
     }
 
